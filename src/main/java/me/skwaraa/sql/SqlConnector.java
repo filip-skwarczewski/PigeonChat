@@ -14,13 +14,9 @@ public class SqlConnector {
         props.setProperty("password",main.dbPass);
         try {
             conn = DriverManager.getConnection(url,props);
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT VERSION()");
-            while (rs.next()) {
-                System.out.println(rs.getString(1));
-            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+
 }
