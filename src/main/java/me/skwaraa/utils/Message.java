@@ -1,25 +1,34 @@
 package me.skwaraa.utils;
 
+import me.skwaraa.Main;
+import me.skwaraa.sql.MessageSql;
+
 public class Message {
-    public int messageId;
-    public Message(int messageId) {
+    private int messageId;
+    private MessageSql mSql;
+    public Message(int messageId, Main main) {
         this.messageId = messageId;
+        mSql = new MessageSql(main);
+    }
+
+    public int getMessageId() {
+        return messageId;
     }
 
     public String getContent() {
-        return "";
+        return mSql.getContentById(messageId);
     }
 
     public int getAuthorId() {
-        return 0;
+        return mSql.getAuthorId(messageId);
     }
 
     public int getReceiverId() {
-        return 0;
+        return mSql.getReceiverId(messageId);
     }
 
-    public String getTime() {
-        return "";
+    public String getDate() {
+        return mSql.getDate(messageId);
     }
 
 }

@@ -10,7 +10,6 @@ public class Main {
     public String dbPass;
     public String dbName;
     public SqlConnector sqlConn;
-    private MessageSql mSql;
     public Main() {
         Dotenv dotenv = Dotenv.load();
 
@@ -20,8 +19,6 @@ public class Main {
         dbName = dotenv.get("DB_NAME");
 
         sqlConn = new SqlConnector(this);
-        mSql = new MessageSql(sqlConn);
-        System.out.println(mSql.getDate(1));
     }
 
     public static void main(String[] args) {

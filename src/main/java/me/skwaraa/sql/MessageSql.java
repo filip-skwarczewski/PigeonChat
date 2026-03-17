@@ -1,15 +1,19 @@
 package me.skwaraa.sql;
 
+import me.skwaraa.Main;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class MessageSql {
     private SqlConnector sqlConn;
-
-    public MessageSql(SqlConnector sqlConn) {
-        this.sqlConn = sqlConn;
+    private Main main;
+    public MessageSql(Main main) {
+        this.sqlConn = main.sqlConn;
     }
+
+    public void createMessage()
 
     public String getContentById(int messageId) {
         try {
