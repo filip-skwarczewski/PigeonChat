@@ -1,4 +1,4 @@
-package me.skwaraa.sql;
+package me.skwaraa.sql.message;
 
 import me.skwaraa.Main;
 

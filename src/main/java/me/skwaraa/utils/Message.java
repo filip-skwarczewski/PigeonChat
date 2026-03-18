@@ -1,7 +1,7 @@
 package me.skwaraa.utils;
 
 import me.skwaraa.Main;
-import me.skwaraa.sql.MessageSql;
+import me.skwaraa.sql.message.MessageSql;
 
 public class Message {
     private final int messageId;
