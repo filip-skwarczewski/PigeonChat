@@ -5,10 +5,8 @@ import me.skwaraa.utils.Message;
 
 public class Main {
     public SqlConnector sqlConn;
-    private Message message;
     public Main() {
-
-        message = new Message(1,this);
+        Message message = new Message(1,this);
         System.out.println(message.getContent());
     }
 

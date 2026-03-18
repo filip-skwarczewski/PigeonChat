@@ -1,12 +1,11 @@
 package me.skwaraa.sql;
 
-import me.skwaraa.Main;
 
 import java.sql.*;
 import java.util.Properties;
 
 public class SqlConnector {
-    public Connection conn;
+    private final Connection conn;
     public SqlConnector() {
         Config config = new Config();
 
@@ -19,6 +18,10 @@ public class SqlConnector {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public Connection getConn() {
+        return this.conn;
     }
 
 }

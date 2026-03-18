@@ -4,8 +4,8 @@ import me.skwaraa.Main;
 import me.skwaraa.sql.MessageSql;
 
 public class Message {
-    private int messageId;
-    private MessageSql mSql;
+    private final int messageId;
+    private final MessageSql mSql;
     public Message(int messageId, Main main) {
         this.messageId = messageId;
         mSql = new MessageSql(main);
