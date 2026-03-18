@@ -2,6 +2,8 @@ package me.skwaraa.sql;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
+import java.util.Objects;
+
 public class Config {
     private final String dbHost;
     private final String dbUser;
@@ -10,10 +12,10 @@ public class Config {
     public Config() {
         Dotenv dotenv = Dotenv.load();
 
-        dbHost = dotenv.get("DB_HOST");
-        dbUser = dotenv.get("DB_USER");
-        dbPass = dotenv.get("DB_PASS");
-        dbName = dotenv.get("DB_NAME");
+        dbHost = Objects.requireNonNull(dotenv.get("DB_HOST"), "DB_HOST missing from .env");
+        dbUser = Objects.requireNonNull(dotenv.get("DB_USER"), "DB_USER missing from .env");
+        dbPass = Objects.requireNonNull(dotenv.get("DB_PASS"), "DB_PASS missing from .env");
+        dbName = Objects.requireNonNull(dotenv.get("DB_NAME"), "DB_NAME missing from .env");
 
     }
 
