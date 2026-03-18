@@ -24,4 +24,9 @@ public class SqlConnector {
         return this.conn;
     }
 
+    public void close() throws SQLException {
+        if(conn != null && !conn.isClosed()) {
+            conn.close();
+        }
+    }
 }

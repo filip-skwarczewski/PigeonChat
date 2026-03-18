@@ -11,6 +11,10 @@ public class Message {
         mSql = new MessageSql(main);
     }
 
+    public void delete() {
+        mSql.deleteMessage(messageId);
+    }
+
     public int getMessageId() {
         return messageId;
     }

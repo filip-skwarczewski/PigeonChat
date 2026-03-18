@@ -1,13 +1,14 @@
 package me.skwaraa;
 
+import me.skwaraa.sql.MessageSql;
 import me.skwaraa.sql.SqlConnector;
-import me.skwaraa.utils.Message;
+
+import java.sql.SQLException;
 
 public class Main {
     public SqlConnector sqlConn;
     public Main() {
-        Message message = new Message(1,this);
-        System.out.println(message.getContent());
+        sqlConn = new SqlConnector();
     }
 
     public static void main(String[] args) {
