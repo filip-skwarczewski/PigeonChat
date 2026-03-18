@@ -18,12 +18,15 @@ public class MessageSql {
 
     public String getContentById(int messageId) {
         try {
-            PreparedStatement ps = sqlConn.conn.prepareStatement("SELECT message FROM messages WHERE messageid = ?");
-            ps.setInt(1,messageId);
-            ResultSet rs = ps.executeQuery();
-            rs.next();
-            String out = rs.getString(1);
-            return out;
+            try (PreparedStatement ps = sqlConn.conn.prepareStatement("SELECT message FROM messages WHERE messageid = ?")) {
+                ps.setInt(1, messageId);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        return rs.getString(1);
+                    }
+                    throw new RuntimeException("No message found with id: " + messageId);
+                }
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -31,11 +34,15 @@ public class MessageSql {
 
     public int getAuthorId(int messageId) {
         try {
-            PreparedStatement ps = sqlConn.conn.prepareStatement("SELECT senderid FROM messages WHERE messageid = ?");
-            ps.setInt(1,messageId);
-            ResultSet rs = ps.executeQuery();
-            rs.next();
-            return rs.getInt(1);
+            try (PreparedStatement ps = sqlConn.conn.prepareStatement("SELECT senderid FROM messages WHERE messageid = ?")) {
+                ps.setInt(1, messageId);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        return rs.getInt(1);
+                    }
+                    throw new RuntimeException("No message found with id: " + messageId);
+                }
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -43,11 +50,15 @@ public class MessageSql {
 
     public int getReceiverId(int messageId) {
         try {
-          PreparedStatement ps = sqlConn.conn.prepareStatement("SELECT receiverid FROM messages WHERE messageid = ?");
-          ps.setInt(1,messageId);
-          ResultSet rs = ps.executeQuery();
-          rs.next();
-          return rs.getInt(1);
+            try (PreparedStatement ps = sqlConn.conn.prepareStatement("SELECT recieverid FROM messages WHERE messageid = ?")) {
+                ps.setInt(1, messageId);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        return rs.getInt(1);
+                    }
+                    throw new RuntimeException("No message found with id: " + messageId);
+                }
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -55,11 +66,15 @@ public class MessageSql {
 
     public String getDate(int messageId) {
         try {
-            PreparedStatement ps = sqlConn.conn.prepareStatement("SELECT date FROM messages WHERE messageid = ?");
-            ps.setInt(1,messageId);
-            ResultSet rs = ps.executeQuery();
-            rs.next();
-            return rs.getString(1);
+            try (PreparedStatement ps = sqlConn.conn.prepareStatement("SELECT date FROM messages WHERE messageid = ?")) {
+                ps.setInt(1, messageId);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        return rs.getString(1);
+                    }
+                    throw new RuntimeException("No message found with id: " + messageId);
+                }
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
