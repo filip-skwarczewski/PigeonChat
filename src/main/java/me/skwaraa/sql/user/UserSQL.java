@@ -5,15 +5,45 @@ import me.skwaraa.Main;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Base64;
 
 public class UserSQL {
-    private final Connection sqlConn;
+    private Connection sqlConn;
     public UserSQL(Main main) {
         this.sqlConn = main.sqlConn.getConn();
+
+    }
+
+    public  createUser()
+
+    public String generateToken() {
+        SecureRandom random = new SecureRandom();
+        byte[] bytes = new byte[48];
+        String token;
+
+        do {
+            random.nextBytes(bytes);
+            token = Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
+        } while (tokenExists(token));
+
+        return token;
+    }
+
+    private boolean tokenExists(String token) {
+        try (PreparedStatement ps = sqlConn.prepareStatement(
+                "SELECT token FROM users WHERE token = ?")) {
+            ps.setString(1, token);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private boolean checkIfUsernameAvailable(String username) {
