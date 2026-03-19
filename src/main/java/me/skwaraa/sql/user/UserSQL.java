@@ -19,8 +19,25 @@ public class UserSQL {
 
     }
 
-    public  createUser()
+//  Returns token
+    public void createUser(String username, String displayName,String email, String password) {
+        String encodedPassword = hashPassword(password);
 
+    }
+
+    public void getUserId(String token) {
+        try {
+            try(PreparedStatement ps = sqlConn.prepareStatement("SELECT userid from users WHERE token = ?")) {
+                ps.setString(1,token);
+                try(ResultSet rs = ps.executeQuery()) {
+                    if(rs.next()) {
+                        return rs.getString(1);
+                    }
+                    throw new RuntimeException("No user found with token: " + token);
+                }
+            }
+        }
+    }
     public String generateToken() {
         SecureRandom random = new SecureRandom();
         byte[] bytes = new byte[48];

@@ -12,4 +12,20 @@ public class User {
         uSql = new UserSQL(main);
     }
 
+    public int getUserId() {
+        return this.userId;
+    }
+
+    public String getUsername() {
+        return uSql.getUsernameById(userId);
+    }
+
+    public String getDisplayName() {
+        return uSql.getDisplayNameById(userId);
+    }
+
+    public String getEmail() {
+        return uSql.getEmail(userId);
+    }
+    
 }
