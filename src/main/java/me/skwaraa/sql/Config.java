@@ -9,6 +9,7 @@ public class Config {
     private final String dbUser;
     private final String dbPass;
     private final String dbName;
+    private final int port;
     public Config() {
         Dotenv dotenv = Dotenv.load();
 
@@ -16,8 +17,15 @@ public class Config {
         dbUser = Objects.requireNonNull(dotenv.get("DB_USER"), "DB_USER missing from .env");
         dbPass = Objects.requireNonNull(dotenv.get("DB_PASS"), "DB_PASS missing from .env");
         dbName = Objects.requireNonNull(dotenv.get("DB_NAME"), "DB_NAME missing from .env");
-
+        try {
+            String x = dotenv.get("SRV_PORT");
+            port = Integer.parseInt(x);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException(e);
+        }
     }
+
+    public int getPort() { return this.port; }
 
 //    Returns the hostname of the SQL server
     public String getHost() {

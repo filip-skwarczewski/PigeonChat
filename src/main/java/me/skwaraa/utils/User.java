@@ -27,5 +27,8 @@ public class User {
     public String getEmail() {
         return uSql.getEmail(userId);
     }
-    
+
+    public void changePassword(String newPassword) {
+        uSql.changePasswordById(newPassword,userId);
+    }
 }
